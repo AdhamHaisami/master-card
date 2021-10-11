@@ -4,7 +4,7 @@ import Card from '../Card';
 
 import useStyles from './style';
 
-function CardsContainer({ items, setItemId, setSelectedItem }) {
+function CardsContainer({ items, setSelectedItem, setItems }) {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
@@ -12,8 +12,9 @@ function CardsContainer({ items, setItemId, setSelectedItem }) {
         ? items.map((item) => (
             <Card
               item={item}
-              setItemId={setItemId}
               setSelectedItem={setSelectedItem}
+              setItems={setItems}
+              items={items}
             />
           ))
         : 'no result'}

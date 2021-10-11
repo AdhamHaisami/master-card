@@ -3,13 +3,14 @@ import Button from '@material-ui/core/Button';
 
 import useStyles from './style';
 
-function Card({ item, setItemId, setSelectedItem }) {
+function Card({ item, items, setItems, setSelectedItem }) {
   const { name, id } = item;
   const classes = useStyles();
 
   const deleteItem = async () => {
     try {
       await Axios.delete(`api/v1/item/${id}`);
+      setItems(items.filter((item) => item.id !== id));
     } catch (error) {
       console.log(error);
     }

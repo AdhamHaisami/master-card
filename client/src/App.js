@@ -10,24 +10,23 @@ function App() {
   const classes = useStyles();
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState({});
-  const [itemId, setItemId] = useState();
 
-  const getItems = async () => {
+  const getItems = async ({ limit, skip }) => {
     const {
       data: { data },
-    } = await Axios.get('api/v1/item');
+    } = await Axios.get(`api/v1/item?limit=${limit || 6}&skip=${skip || 0}`);
     setItems(data);
   };
 
   useEffect(() => {
-    getItems();
-  }, [selectedItem]);
+    getItems({ limit: 6, skip: 0 });
+  }, []);
   return (
     <>
       <div className={classes.container}>
         <CardsContainer
           items={items}
-          setItemId={setItemId}
+          setItems={setItems}
           setSelectedItem={setSelectedItem}
         />
         <Details item={selectedItem} />
